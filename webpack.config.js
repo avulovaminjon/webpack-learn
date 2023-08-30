@@ -30,6 +30,7 @@ module.exports = {
     publicPath: '/',
   },
   optimization : {
+    moduleIds: 'deterministic',
     runtimeChunk : "single",
     splitChunks : {
       cacheGroups : {
