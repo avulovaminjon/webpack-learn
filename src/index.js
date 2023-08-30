@@ -2,21 +2,38 @@ import _ from 'lodash';
 import printMe from './print.js';
 import './style.css';
 import Icon from './bg.jpg';
+import numRef from './ref.json';
 
-function component() {
-    const element = document.createElement('div');
-    const btn = document.createElement('button');
-    // Lodash, now imported by this script
-    element.innerHTML = _.join(['Hello', 'webpack 5'], ' ');
-    element.classList.add('hello');
+// function getComponent() {
 
-    // // Add the image to our existing div.
-    // const myIcon = new Image();
-    // myIcon.src = Icon;
+//   return import('lodash')
+//     .then(({ default: _ }) => {
+//       const element = document.createElement('div');
 
-    // element.appendChild(myIcon);
+//       element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+//       element.classList.add('hello');
 
-    return element;
-  }
-  
-  document.body.appendChild(component());
+//       return element;
+//     })
+//     .catch((error) => 'An error occurred while loading the component');
+//  }
+
+// getComponent().then((component) => {
+//   document.body.appendChild(component);
+// });
+
+//  async function
+
+async function getComponent() {
+  const element = document.createElement('div');
+  const { default: _ } = await import('lodash');
+
+  element.innerHTML = _.join(['Hello', 'webpack 5'], ' ');
+  element.classList.add('hello');
+  element.onclick = printMe.bind(null, "hello world1");
+  return element;
+ }
+
+ getComponent().then((component) => {
+   document.body.appendChild(component);
+ });
